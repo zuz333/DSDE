@@ -1,118 +1,613 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DILAPAN-S – Informationen für Patientinnen</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DILAPAN-S – Informationen für Patientinnen</title>
+  <meta name="description" content="Informationen für Patientinnen zur Geburtseinleitung und zur hormonfreien Vorbereitung des Gebärmutterhalses mit DILAPAN-S." />
+  <style>
+    :root{
+      --bg:#FFFBF9;
+      --bg-soft:#FFFFFF;
+      --surface:#FFFFFF;
+      --text:#2f2a25;
+      --muted:#6b6470;
+      --line:#eee3ea;
+      --accent:#C80078;
+      --accent-deep:#75144B;
+      --accent-violet:#787DAA;
+      --button:#C80078;
+      --button-text:#ffffff;
+      --faq:#faf5f8;
+      --max:1120px;
+    }
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #FFFBF9;
-  color: #2f2a25;
-}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 40px 20px;
-}
+    img{max-width:100%;display:block}
+    a{color:inherit}
+    .wrap{width:min(calc(100% - 32px), var(--max)); margin:0 auto}
 
-h1, h2 {
-  font-family: Georgia, serif;
-}
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter:saturate(120%) blur(10px);
+      background:rgba(255,251,249,.9);
+      border-bottom:1px solid rgba(238,227,234,.95);
+    }
+    .header-inner{
+      min-height:68px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .brand{
+      font-family: Georgia, "Times New Roman", serif;
+      font-size:1.08rem;
+      letter-spacing:.08em;
+      color:var(--accent-deep);
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .header-label{
+      font-size:.97rem;
+      color:var(--muted);
+      white-space:nowrap;
+    }
 
-.hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-}
+    .hero{
+      padding: clamp(42px, 7vw, 88px) 0 clamp(50px, 8vw, 94px);
+      background:
+        radial-gradient(circle at 90% 24%, rgba(200,0,120,.05), rgba(200,0,120,0) 18%),
+        radial-gradient(circle at 85% 78%, rgba(120,125,170,.06), rgba(120,125,170,0) 22%),
+        linear-gradient(180deg, rgba(255,255,255,.2), rgba(255,255,255,0));
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(28px, 4vw, 72px);
+      align-items:center;
+    }
 
-.blob {
-  width: 100%;
-  aspect-ratio: 4/5;
-  background: linear-gradient(135deg, #f5e6dc, #f0d6c8);
-  clip-path: polygon(15% 4%, 52% 0%, 84% 8%, 98% 31%, 100% 63%, 90% 88%, 69% 100%, 35% 98%, 9% 86%, 0% 58%, 3% 28%);
-}
+    .eyebrow, .section-tag{
+      display:inline-block;
+      margin:0 0 16px;
+      color:var(--accent);
+      font-size:.9rem;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
 
-.button {
-  background: #C80078;
-  color: white;
-  padding: 15px 25px;
-  display: inline-block;
-  margin-top: 20px;
-  border-radius: 10px;
-  text-decoration: none;
-}
+    h1, h2, h3{
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight:400;
+      letter-spacing:-.02em;
+      line-height:1.06;
+      margin:0;
+      color:var(--text);
+    }
+    h1{
+      font-size: clamp(2.5rem, 5vw, 4.4rem);
+      max-width:12ch;
+    }
+    h2{
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom:14px;
+    }
+    h3{
+      font-size:1.45rem;
+      margin-bottom:10px;
+    }
 
-.section {
-  margin-top: 80px;
-}
+    .hero-line{
+      width:60px;
+      height:2px;
+      background:rgba(117,20,75,.35);
+      margin:28px 0;
+      border-radius:999px;
+    }
 
-.faq details {
-  background: #faf5f8;
-  margin-bottom: 10px;
-  padding: 15px;
-  border-radius: 10px;
-}
+    .lead{
+      max-width:38rem;
+      font-size: clamp(1.04rem, 1.35vw, 1.2rem);
+      color:var(--muted);
+      margin:0 0 28px;
+    }
 
-@media (max-width: 800px) {
-  .hero {
-    grid-template-columns: 1fr;
-  }
-}
-</style>
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:54px;
+      padding:0 24px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:700;
+      transition:transform .18s ease, background .18s ease, box-shadow .18s ease, color .18s ease;
+      border:1px solid transparent;
+    }
+    .btn-primary{
+      background:var(--button);
+      color:var(--button-text);
+      box-shadow:0 14px 28px rgba(200,0,120,.14);
+    }
+    .btn-primary:hover{transform:translateY(-1px); background:#b4006d}
+    .btn-secondary{
+      background:transparent;
+      color:var(--accent-deep);
+      border-color:rgba(117,20,75,.18);
+    }
+    .btn-secondary:hover{background:rgba(117,20,75,.04)}
+    .hero-note{
+      margin-top:14px;
+      color:#867b71;
+      font-size:.94rem;
+    }
 
+    .blob-wrap{
+      position:relative;
+      isolation:isolate;
+    }
+    .blob-wrap::before{
+      content:"";
+      position:absolute;
+      inset:10% auto auto -2%;
+      width:44%;
+      height:36%;
+      background:radial-gradient(circle, rgba(200,0,120,.08), rgba(200,0,120,0) 70%);
+      filter:blur(16px);
+      z-index:-1;
+    }
+    .blob-wrap::after{
+      content:"";
+      position:absolute;
+      inset:auto -4% 2% auto;
+      width:42%;
+      height:32%;
+      background:radial-gradient(circle, rgba(120,125,170,.09), rgba(120,125,170,0) 70%);
+      filter:blur(16px);
+      z-index:-1;
+    }
+    .blob{
+      width:100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      clip-path: polygon(14% 4%, 46% 0%, 80% 6%, 98% 25%, 100% 60%, 90% 87%, 67% 100%, 31% 98%, 8% 84%, 0% 54%, 4% 25%);
+      box-shadow:0 28px 65px rgba(117,20,75,.10);
+    }
+    .blob.alt{
+      clip-path: polygon(10% 10%, 34% 0%, 72% 4%, 95% 20%, 100% 52%, 92% 81%, 68% 98%, 30% 100%, 8% 83%, 0 50%, 3% 24%);
+    }
+
+    main section{
+      padding: clamp(48px, 6vw, 82px) 0;
+      border-top:1px solid rgba(238,227,234,.9);
+    }
+    .section-intro{
+      max-width:760px;
+      margin-bottom:28px;
+    }
+    .section-intro p{
+      color:var(--muted);
+      margin:0;
+      max-width:48rem;
+      font-size:1.05rem;
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap: clamp(24px, 3vw, 36px);
+      align-items:center;
+    }
+    .panel{
+      background:rgba(255,255,255,.7);
+      border:1px solid rgba(238,227,234,.95);
+      border-radius:22px;
+      padding: clamp(20px, 3vw, 28px);
+    }
+    .panel p, .panel li{color:var(--muted)}
+    .panel p:last-child{margin-bottom:0}
+    .plain-list{
+      margin:0;
+      padding-left:18px;
+    }
+    .plain-list li + li{margin-top:10px}
+
+    .steps{
+      display:grid;
+      grid-template-columns: repeat(4,1fr);
+      gap:18px;
+      margin-top:28px;
+    }
+    .step{
+      background:var(--surface);
+      border:1px solid rgba(238,227,234,.95);
+      border-radius:20px;
+      padding:20px 18px;
+      min-height:100%;
+    }
+    .step-no{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:34px;height:34px;
+      border-radius:50%;
+      border:1px solid rgba(117,20,75,.18);
+      color:var(--accent-deep);
+      margin-bottom:14px;
+      font-weight:700;
+    }
+    .step h3{
+      font-size:1.12rem;
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-weight:700;
+      letter-spacing:0;
+      margin-bottom:8px;
+    }
+    .step p{
+      margin:0;
+      color:var(--muted);
+      font-size:.98rem;
+    }
+
+    .benefits{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+      margin-top:22px;
+    }
+    .benefit{
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(238,227,234,.95);
+      border-radius:18px;
+      padding:18px 18px 18px 48px;
+      position:relative;
+      color:#5f564e;
+    }
+    .benefit::before{
+      content:"";
+      position:absolute;
+      left:18px; top:22px;
+      width:14px; height:14px;
+      border-radius:50%;
+      background:rgba(200,0,120,.85);
+      box-shadow:0 0 0 6px rgba(200,0,120,.10);
+    }
+
+    .faq-grid{
+      display:grid;
+      gap:12px;
+      margin-top:20px;
+    }
+    details{
+      background:var(--faq);
+      border:1px solid rgba(238,227,234,.95);
+      border-radius:18px;
+      overflow:hidden;
+    }
+    summary{
+      list-style:none;
+      cursor:pointer;
+      padding:18px 20px;
+      font-weight:700;
+      color:#463f38;
+      position:relative;
+      padding-right:52px;
+    }
+    summary::-webkit-details-marker{display:none}
+    summary::after{
+      content:"+";
+      position:absolute;
+      right:20px; top:50%;
+      transform:translateY(-50%);
+      color:var(--accent-deep);
+      font-size:1.3rem;
+      font-weight:400;
+    }
+    details[open] summary::after{content:"–"}
+    .faq-content{
+      padding:0 20px 18px;
+      color:var(--muted);
+    }
+    .faq-content p{margin:0}
+    .faq-content p + p{margin-top:10px}
+
+    .cta-block{
+      background:linear-gradient(180deg, rgba(255,255,255,.88), rgba(250,245,248,.92));
+      border:1px solid rgba(238,227,234,.95);
+      border-radius:28px;
+      padding: clamp(24px, 4vw, 42px);
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:22px;
+      align-items:center;
+      box-shadow:0 20px 48px rgba(117,20,75,.06);
+    }
+    .cta-block p{
+      margin:0;
+      color:var(--muted);
+      max-width:38rem;
+    }
+    .cta-actions{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    footer{
+      padding:30px 0 60px;
+      color:#7d746c;
+      font-size:.95rem;
+    }
+    .foot-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      padding-top:22px;
+      border-top:1px solid rgba(238,227,234,.9);
+    }
+    .foot-grid p{margin:0 0 10px}
+    .refs a{
+      color:var(--accent-deep);
+      text-decoration:none;
+      border-bottom:1px solid rgba(117,20,75,.22);
+    }
+
+    @media (max-width: 940px){
+      .hero-grid,
+      .two-col,
+      .cta-block,
+      .foot-grid{
+        grid-template-columns:1fr;
+      }
+      .steps{grid-template-columns:1fr 1fr}
+      .cta-actions{justify-content:flex-start}
+    }
+
+    @media (max-width: 640px){
+      .header-inner{min-height:62px}
+      .brand{font-size:1rem}
+      .header-label{font-size:.9rem}
+      .hero{padding-top:30px}
+      .steps,
+      .benefits{
+        grid-template-columns:1fr;
+      }
+      .btn{width:100%}
+      .cta-row{display:grid}
+    }
+  </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top">DILAPAN-S</a>
+      <div class="header-label">Informationen für Patientinnen</div>
+    </div>
+  </header>
 
-<div class="container">
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Geburtseinleitung verstehen</span>
+          <h1>Sanfte Vorbereitung auf Ihre Geburt mit DILAPAN-S</h1>
+          <div class="hero-line"></div>
+          <p class="lead">
+            Wenn Ihre Ärztin, Ihr Arzt oder Ihre Hebamme eine Geburtseinleitung empfiehlt, stehen verschiedene Methoden zur Verfügung.
+            DILAPAN-S ist eine hormonfreie Option zur Vorbereitung des Gebärmutterhalses – ruhig, schrittweise und ohne ständiges Monitoring.
+          </p>
+          <div class="cta-row">
+            <a href="#" class="btn btn-primary">Patientenbroschüre herunterladen</a>
+            <a href="#faq" class="btn btn-secondary">Häufige Fragen</a>
+          </div>
+          <p class="hero-note">Zur allgemeinen Information – bitte besprechen Sie Ihre individuelle Situation immer mit Ihrem Behandlungsteam.</p>
+        </div>
 
-<div class="hero">
-  <div>
-    <p style="color:#C80078; text-transform:uppercase;">Geburtseinleitung verstehen</p>
-    <h1>Sanfte Vorbereitung auf Ihre Geburt mit DILAPAN-S</h1>
-    <p>
-      DILAPAN-S ist eine hormonfreie Option zur Vorbereitung des Gebärmutterhalses – ruhig, schrittweise und ohne ständiges Monitoring.
-    </p>
-    <a href="#" class="button">Patientenbroschüre herunterladen</a>
-  </div>
+        <div class="blob-wrap">
+          <img src="images/hero.jpg" class="blob" alt="DILAPAN-S in sanfter, heller Bildsprache" />
+        </div>
+      </div>
+    </section>
 
-  <div class="blob"></div>
-</div>
+    <section>
+      <div class="wrap">
+        <div class="section-intro">
+          <span class="section-tag">Grundlagen</span>
+          <h2>Was bedeutet eine Geburtseinleitung?</h2>
+          <p>
+            Eine Geburtseinleitung bedeutet, dass die Geburt Ihres Babys künstlich eingeleitet wird. Damit eine vaginale Geburt beginnen kann,
+            sollte der Gebärmutterhals weich, verkürzt und geöffnet sein. Genau diese Vorbereitung wird als Zervixreifung bezeichnet.
+          </p>
+        </div>
 
-<div class="section">
-  <h2>Was bedeutet eine Geburtseinleitung?</h2>
-  <p>
-    Eine Geburtseinleitung bedeutet, dass die Geburt Ihres Babys künstlich eingeleitet wird.
-  </p>
-</div>
+        <div class="two-col">
+          <div class="blob-wrap">
+            <img src="images/induction.jpg" class="blob alt" alt="Helle, ruhige Mutter-Kind-Szene" />
+          </div>
+          <div>
+            <p class="lead">
+              Oft ist der Gebärmutterhals zu diesem Zeitpunkt noch nicht bereit für die Geburt. In diesen Fällen wird zunächst die sogenannte Zervixreifung durchgeführt.
+            </p>
+            <div class="panel">
+              <h3>Warum wird eingeleitet?</h3>
+              <p>
+                Eine Einleitung wird meist dann empfohlen, wenn das Behandlungsteam zu dem Schluss kommt, dass die Vorteile einer Geburt die Risiken des weiteren Abwartens überwiegen – zum Beispiel bei Terminüberschreitung oder aus medizinischen Gründen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<div class="section">
-  <h2>Was ist DILAPAN-S?</h2>
-  <p>
-    Ein schlanker Stab aus Hydrogel, der sich sanft ausdehnt und den Gebärmutterhals vorbereitet.
-  </p>
-</div>
+    <section>
+      <div class="wrap two-col">
+        <div>
+          <span class="section-tag">DILAPAN-S</span>
+          <h2>Was ist DILAPAN-S?</h2>
+          <p class="lead">
+            DILAPAN-S ist so konzipiert, dass es sanft und vorhersehbar wirkt. Verwendet wird ein schlanker Stab – ungefähr in der Größe eines Streichholzes – aus einem speziellen Hydrogelmaterial.
+          </p>
+          <div class="panel">
+            <h3>Wie der Stab wirkt</h3>
+            <p>
+              Das bedeutet: Er besteht aus einer weichen, aufnahmefähigen Substanz, die sich beim Aufnehmen von Feuchtigkeit aus Ihrem Körper vorsichtig ausdehnt. Sobald der Stab in den Gebärmutterhals eingelegt ist, öffnet er diesen langsam über die Zeit.
+            </p>
+            <p>
+              Er arbeitet leise im Hintergrund – ohne Hormone und ohne ständige Überwachung.
+            </p>
+          </div>
+        </div>
+        <div class="blob-wrap">
+          <img src="images/product.jpg" class="blob" alt="Produktbild DILAPAN-S in heller, weicher Bildsprache" />
+        </div>
+      </div>
+    </section>
 
-<div class="section faq">
-  <h2>Häufige Fragen</h2>
+    <section>
+      <div class="wrap">
+        <div class="section-intro">
+          <span class="section-tag">Ablauf</span>
+          <h2>Wie läuft die Anwendung ab?</h2>
+          <p>Der genaue Ablauf hängt von Ihrer Klinik ab. Grundsätzlich folgt die Anwendung meist einem ruhigen, gut planbaren Schema.</p>
+        </div>
 
-  <details>
-    <summary>Ist DILAPAN-S hormonfrei?</summary>
-    <p>Ja.</p>
-  </details>
+        <div class="steps">
+          <article class="step">
+            <div class="step-no">1</div>
+            <h3>Einlegen</h3>
+            <p>DILAPAN-S wird von einer medizinischen Fachperson vorsichtig in den Gebärmutterhals eingelegt.</p>
+          </article>
+          <article class="step">
+            <div class="step-no">2</div>
+            <h3>Ausdehnen</h3>
+            <p>Durch Feuchtigkeit dehnt sich das Material langsam aus und unterstützt so die Reifung des Gebärmutterhalses.</p>
+          </article>
+          <article class="step">
+            <div class="step-no">3</div>
+            <h3>Wartezeit</h3>
+            <p>Typischerweise bleibt DILAPAN-S 12–24 Stunden eingelegt. In vielen Fällen sind Ruhe, Schlafen, Aufstehen und Gehen möglich.</p>
+          </article>
+          <article class="step">
+            <div class="step-no">4</div>
+            <h3>Nächster Schritt</h3>
+            <p>Nach dem Entfernen prüft Ihr Behandlungsteam, wie bereit der Gebärmutterhals ist und wie es weitergeht.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-  <details>
-    <summary>Wie lange bleibt es eingelegt?</summary>
-    <p>12–24 Stunden.</p>
-  </details>
+    <section>
+      <div class="wrap">
+        <div class="section-intro">
+          <span class="section-tag">Vorteile</span>
+          <h2>Warum manche Frauen diese Methode bevorzugen</h2>
+          <p>DILAPAN-S soll hier nicht „verkauft“ werden. Es geht um eine sachliche, gut verständliche Einordnung der Methode.</p>
+        </div>
+        <div class="benefits">
+          <div class="benefit">Hormonfreie Methode zur Zervixreifung</div>
+          <div class="benefit">Sanfte, schrittweise Wirkung</div>
+          <div class="benefit">Unterstützt die natürliche Vorbereitung des Körpers</div>
+          <div class="benefit">Wird von medizinischen Fachpersonen eingesetzt</div>
+        </div>
+      </div>
+    </section>
 
-</div>
+    <section id="faq">
+      <div class="wrap">
+        <div class="section-intro">
+          <span class="section-tag">FAQ</span>
+          <h2>Häufige Fragen</h2>
+          <p>Diese Fragen orientieren sich an typischen Unsicherheiten vor einer Geburtseinleitung und an den Informationen für Patientinnen auf dilapan.com.</p>
+        </div>
+        <div class="faq-grid">
+          <details>
+            <summary>Was ist eine Geburtseinleitung?</summary>
+            <div class="faq-content"><p>Eine Geburtseinleitung bedeutet, dass die Geburt Ihres Babys künstlich angestoßen wird. Dazu gehört meist zuerst die Vorbereitung des Gebärmutterhalses, damit er weich, kürzer und offener wird.</p></div>
+          </details>
+          <details>
+            <summary>Was ist DILAPAN-S?</summary>
+            <div class="faq-content"><p>DILAPAN-S ist ein kleiner Dilatator aus speziellem Hydrogelmaterial. Er enthält keine Medikamente und unterstützt die Reifung des Gebärmutterhalses, indem er Feuchtigkeit aufnimmt und sich langsam ausdehnt.</p></div>
+          </details>
+          <details>
+            <summary>Ist DILAPAN-S hormonfrei?</summary>
+            <div class="faq-content"><p>Ja. DILAPAN-S enthält keine Hormone. Die Wirkung beruht auf einem mechanischen Prinzip durch das langsame Ausdehnen des Materials.</p></div>
+          </details>
+          <details>
+            <summary>Tut die Anwendung weh?</summary>
+            <div class="faq-content"><p>Das Einlegen kann unangenehm sein und manche Frauen empfinden es auch als etwas schmerzhaft. Viele beschreiben das Gefühl jedoch ähnlich wie bei einer vaginalen Untersuchung.</p></div>
+          </details>
+          <details>
+            <summary>Wie lange bleibt DILAPAN-S eingelegt?</summary>
+            <div class="faq-content"><p>Typischerweise 12–24 Stunden. Das genaue Timing legt Ihr Behandlungsteam fest.</p></div>
+          </details>
+          <details>
+            <summary>Kann ich mich währenddessen bewegen?</summary>
+            <div class="faq-content"><p>In vielen Fällen ja. Laut Patienteninformationen sind Ruhe, Schlafen, Aufstehen, Gehen und alltägliche Aktivitäten meist möglich.</p></div>
+          </details>
+          <details>
+            <summary>Muss ich dafür im Krankenhaus bleiben?</summary>
+            <div class="faq-content"><p>Je nach Situation und je nach Klinik kann es möglich sein, die Reifungsphase zu Hause zu verbringen. Ob das für Sie infrage kommt, entscheidet Ihr Behandlungsteam.</p></div>
+          </details>
+          <details>
+            <summary>Ist DILAPAN-S für jede Frau geeignet?</summary>
+            <div class="faq-content"><p>Ob DILAPAN-S für Sie geeignet ist, hängt von Ihrer individuellen Schwangerschaft und Ihrer medizinischen Situation ab.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
 
-</div>
+    <section>
+      <div class="wrap">
+        <div class="cta-block">
+          <div>
+            <span class="section-tag">Mehr Informationen</span>
+            <h2>Sie möchten alles in Ruhe nachlesen?</h2>
+            <p>Laden Sie die Patientenbroschüre herunter und besprechen Sie offene Fragen anschließend mit Ihrem Behandlungsteam.</p>
+          </div>
+          <div class="cta-actions">
+            <a href="#" class="btn btn-primary">Patientenbroschüre herunterladen</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
+  <footer>
+    <div class="wrap foot-grid">
+      <div>
+        <p><strong>Hinweis:</strong> Diese Seite dient ausschließlich der allgemeinen Information und ersetzt keine medizinische Beratung.</p>
+        <p>Bitte besprechen Sie die für Sie geeignete Vorgehensweise immer mit Ihrer Ärztin, Ihrem Arzt oder Ihrer Hebamme.</p>
+        <p>DILAPAN-S ist ein Medizinprodukt. Anwendung und Verfügbarkeit können je nach Land variieren.</p>
+      </div>
+      <div class="refs">
+        <p><strong>Quellen:</strong></p>
+        <p><a href="https://www.dilapan.com/expectant-mothers" target="_blank" rel="noopener noreferrer">dilapan.com – Expectant Mothers</a></p>
+        <p><a href="https://www.dilapan.com/blog" target="_blank" rel="noopener noreferrer">dilapan.com – Patient blog articles</a></p>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
