@@ -47,19 +47,22 @@
       border-bottom:1px solid rgba(238,227,234,.95);
     }
     .header-inner{
-      min-height:68px;
+      min-height:60px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:16px;
     }
     .brand{
-      font-family: Georgia, "Times New Roman", serif;
-      font-size:1.08rem;
-      letter-spacing:.08em;
-      color:var(--accent-deep);
+      display:inline-flex;
+      align-items:center;
       text-decoration:none;
       white-space:nowrap;
+    }
+    .logo{
+      height:28px;
+      width:auto;
+      display:block;
     }
     .header-label{
       font-size:.97rem;
@@ -395,9 +398,9 @@
     }
 
     @media (max-width: 640px){
-      .header-inner{min-height:62px}
-      .brand{font-size:1rem}
-      .header-label{font-size:.9rem}
+      .header-inner{min-height:56px}
+      .header-label{font-size:.88rem}
+      .logo{height:24px}
       .hero{padding-top:30px}
       .steps,
       .benefits{
@@ -413,7 +416,9 @@
 <body>
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="#top">DILAPAN-S</a>
+      <a class="brand" href="#top">
+        <img src="images/dilapan-logo-pink.svg" alt="DILAPAN-S logo" class="logo" />
+      </a>
       <div class="header-label">Informationen für Patientinnen</div>
     </div>
   </header>
